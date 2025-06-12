@@ -42,6 +42,12 @@ export default function BrowseDogs() {
             const breedResults = await fetch(`${serverUrl}/dogs/breeds`, {
                 credentials: 'include',
             });
+
+            if (breedResults.status === 401) {
+                alert('Please log in.');
+                navigate('/');
+                return;
+            }
             const breedResultsJson = await breedResults.json();
             setBreeds(breedResultsJson);
         };
